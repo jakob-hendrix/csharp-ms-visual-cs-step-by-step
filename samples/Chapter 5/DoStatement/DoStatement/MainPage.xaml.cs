@@ -29,7 +29,9 @@ namespace DoStatement
 
         private void showStepsClick(object sender, RoutedEventArgs e)
         {
-
+            int amount = int.Parse(number.Text);
+            steps.Text = "";
+            string current = "";
         }
     }
 }
