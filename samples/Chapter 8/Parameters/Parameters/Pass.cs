@@ -4,6 +4,9 @@ namespace Parameters
 {
     class Pass
     {
-        // TODO:
+        public static void Value(ref int param)
+        {
+            param = 42;
+        }
     }
 }

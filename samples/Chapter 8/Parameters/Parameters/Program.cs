@@ -12,7 +12,10 @@ namespace Parameters
     {
         static void doWork()
         {
-            // TODO:
+            int i = 0;
+            Console.WriteLine(i);
+            Pass.Value(ref i);
+            Console.WriteLine(i);
         }
 
         static void Main(string[] args)
