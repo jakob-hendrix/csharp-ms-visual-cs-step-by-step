@@ -6,7 +6,21 @@ namespace Vehicles
     {
         static void doWork()
         {
-            // TODO:
+            Console.WriteLine("Journey by airplane:");
+            Airplane myPlane = new Airplane();
+            myPlane.StartEngine("Contact");
+            myPlane.TakeOff();
+            myPlane.Drive();
+            myPlane.Land();
+            myPlane.StopEngine("Whirr");
+
+            Console.WriteLine("\nJourney by car:");
+            Car myCar = new Car();
+            myCar.StartEngine("Brm Brm");
+            myCar.Accelerate();
+            myCar.Drive();
+            myCar.Brake();
+            myCar.StopEngine("Phut Phut");
         }
 
         static void Main()
@@ -17,7 +31,7 @@ namespace Vehicles
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: {0}", ex.Message);
+                Console.WriteLine($"Exception: {ex.Message}");
             }
         }
     }
