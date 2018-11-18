@@ -1,4 +1,5 @@
 ﻿using System;
+using Extensions;
 
 namespace ExtensionMethod
 {
@@ -6,7 +7,11 @@ namespace ExtensionMethod
     {
         static void doWork()
         {
-            // TODO:		
+            int x = 591;
+            for (int i = 2; i <= 10; i++)
+            {
+                Console.WriteLine($"{x} in base {i} is {x.ConvertToBase(i)}");
+            }
         }
 
         static void Main()
