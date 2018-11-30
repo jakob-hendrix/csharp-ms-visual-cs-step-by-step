@@ -8,7 +8,13 @@ namespace AutomaticProperties
     {
         static void doWork()
         {
-            // TODO:
+            Polygon square = new Polygon();
+            Polygon triangle = new Polygon { NumSides = 3 };
+            Polygon pentagon = new Polygon { NumSides = 5, SideLength = 15.5 };
+
+            Console.WriteLine($"Square: {square.ToString()}");
+            Console.WriteLine($"Triangle: {triangle.ToString()}");
+            Console.WriteLine($"Pentagon: {pentagon.ToString()}");
         }
 
         static void Main(string[] args)
