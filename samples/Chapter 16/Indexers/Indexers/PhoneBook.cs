@@ -24,9 +24,38 @@ namespace Indexers
 			this.used++;
 		}
 		
-		// TODO: write 1st indexer here
+		public Name this [PhoneNumber number]
+        {
+            get
+            {
+                int i = Array.IndexOf(this.phoneNumbers, number);
+                if (i != -1)
+                {
+                    return this.names[i];
+                }
+                else
+                {
+                    return new Name();
+                }
+            }
+        }
 
-		// TODO: write 2nd indexer here
+		public PhoneNumber this [Name name]
+        {
+            get
+            {
+                int i = Array.IndexOf(this.names, name);
+                if (i != -1)
+                {
+                    return this.phoneNumbers[i];
+                }
+                else
+                {
+                    return new PhoneNumber();
+                }
+
+            }
+        }
 
 		private void enlargeIfFull()
 		{

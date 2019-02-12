@@ -9,6 +9,6 @@ namespace Drawing
 {
     interface IColor
     {
-        Color Color { set; }
+        void SetColor(Color color);
     }
 }

@@ -15,6 +15,11 @@ namespace CalculateFactorial
 
         private void run()
         {
+            int num = 0;
+            int workNum = 0;
+            num = ++workNum;
+            num = workNum++;
+
             Console.Write("Please enter a positive integer: ");
             string inputValue = Console.ReadLine();
             long factorialValue = CalculateFactorial(inputValue);

@@ -36,14 +36,15 @@ namespace Drawing
             if (mySquare is IDraw)
             {
                 IDraw drawSquare = mySquare;
-                drawSquare.SetLocation((int)mouseLocation.X, (int)mouseLocation.Y);
+                drawSquare.X = (int)mouseLocation.X;
+                drawSquare.Y = (int)mouseLocation.Y;
                 drawSquare.Draw(drawingCanvas);
             }
 
             if (mySquare is IColor)
             {
                 IColor colorSquare = mySquare;
-                colorSquare.SetColor(Colors.BlueViolet);
+                colorSquare.Color = Colors.BlueViolet;
             }
         }
 
@@ -55,14 +56,15 @@ namespace Drawing
             if (myCircle is IDraw)
             {
                 IDraw drawCircle = myCircle;
-                drawCircle.SetLocation((int)mouseLocation.X, (int)mouseLocation.Y);
+                drawCircle.X = (int)mouseLocation.X;
+                drawCircle.Y = (int)mouseLocation.Y;
                 drawCircle.Draw(drawingCanvas);
             }
 
             if (myCircle is IColor)
             {
                 IColor colorCircle = myCircle;
-                colorCircle.SetColor(Colors.HotPink);
+                colorCircle.Color = Colors.HotPink;
             }
         }
     }
