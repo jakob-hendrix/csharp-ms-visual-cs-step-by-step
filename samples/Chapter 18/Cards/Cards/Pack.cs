@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Cards
 {
@@ -6,19 +7,28 @@ namespace Cards
     {
         public const int NumSuits = 4;
         public const int CardsPerSuit = 13;
-        private PlayingCard[,] cardPack;
+
+        //private PlayingCard[,] cardPack;
+        private Dictionary<Suit, List<PlayingCard>> cardPack;
+
         private Random randomCardSelector = new Random();
 
         public Pack()
         {
-            this.cardPack = new PlayingCard[NumSuits, CardsPerSuit];
+            //this.cardPack = new PlayingCard[NumSuits, CardsPerSuit];
+            this.cardPack = new Dictionary<Suit, List<PlayingCard>>(NumSuits);  // init to size 4
 
             for (Suit suit = Suit.Clubs; suit <= Suit.Spades; suit++)
             {
+                List<PlayingCard> cardsInSuit = new List<PlayingCard>(CardsPerSuit); // init this suit
+
                 for (Value value = Value.Two; value <= Value.Ace; value++)
                 {
-                    this.cardPack[(int)suit, (int)value] = new PlayingCard(suit, value);
+                    //this.cardPack[(int)suit, (int)value] = new PlayingCard(suit, value);
+                    cardsInSuit.Add(new PlayingCard(suit, value));
                 }
+
+                this.cardPack.Add(suit, cardsInSuit);
             }
         }
 
@@ -37,8 +47,13 @@ namespace Cards
                 value = (Value)randomCardSelector.Next(CardsPerSuit);
             }
 
-            PlayingCard card = this.cardPack[(int)suit, (int)value];
-            this.cardPack[(int)suit, (int)value] = null;
+            //PlayingCard card = this.cardPack[(int)suit, (int)value];
+            //this.cardPack[(int)suit, (int)value] = null;
+
+            List<PlayingCard> cardsInSuit = this.cardPack[suit];
+            PlayingCard card = cardsInSuit.Find(c => c.CardValue == value);
+            cardsInSuit.Remove(card);
+
             return card;
         }
 
@@ -60,7 +75,9 @@ namespace Cards
 
         private bool IsCardAlreadyDealt(Suit suit, Value value)
         {
-            return (this.cardPack[(int)suit, (int)value] == null);
+            //return (this.cardPack[(int)suit, (int)value] == null);
+            List<PlayingCard> cardsInSuit = this.cardPack[suit];
+            return (!cardsInSuit.Exists(c => c.CardSuit == suit && c.CardValue == value));
         }
     }
 }

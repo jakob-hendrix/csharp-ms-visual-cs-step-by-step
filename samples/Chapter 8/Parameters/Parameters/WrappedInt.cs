@@ -2,6 +2,6 @@
 {
     class WrappedInt
     {
-        // TODO:
+        public int Number;
     }
 }
