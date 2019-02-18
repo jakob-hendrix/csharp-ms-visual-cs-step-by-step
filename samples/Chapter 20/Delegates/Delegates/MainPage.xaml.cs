@@ -16,6 +16,7 @@ using DataTypes;
 using AuditService;
 using DeliveryService;
 using Windows.UI.Popups;
+using CheckoutService;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -30,6 +31,7 @@ namespace Delegates
         private Order order = null;
         private Auditor auditor = null;
         private Shipper shipper = null;
+        private CheckoutController checkoutController = null;
 
         public MainPage()
         {
@@ -37,6 +39,9 @@ namespace Delegates
 
             this.auditor = new Auditor();
             this.shipper = new Shipper();
+            this.checkoutController = new CheckoutController();
+            this.checkoutController.CheckoutProcessing += this.auditor.AuditOrder;
+            this.checkoutController.CheckoutProcessing += this.shipper.ShipOrder;
         }
 
         private void MainPageLoaded(object sender, RoutedEventArgs e)
@@ -107,11 +112,7 @@ namespace Delegates
             try
             {
                 // Perform the checkout processing
-                if (this.requestPayment())
-                {
-                    this.auditor.AuditOrder(this.order);
-                    this.shipper.ShipOrder(this.order);
-                }
+                this.checkoutController.CheckoutProcessing(this.order);    
 
                 // Display a summary of the order
                 MessageDialog dlg = new MessageDialog($"Order {order.OrderID}, value {order.TotalValue:C}", "Order Placed");
@@ -129,15 +130,6 @@ namespace Delegates
                 MessageDialog dlg = new MessageDialog(ex.Message, "Exception");
                 dlg.ShowAsync();
             }
-        }
-
-        private bool requestPayment()
-        {
-            // Payment processing goes here
-
-            // Payment logic is not implemented in this example
-            // - simply return true to indicate payment has been received
-            return true;
         }
     }
 }

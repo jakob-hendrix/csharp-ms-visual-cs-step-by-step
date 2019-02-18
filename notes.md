@@ -19,3 +19,16 @@
 Each time `GetEnumerator()` is called, a new Enumerator object is built that knows how and in what order to return whatever object is being enumeratoed over.
 
 On the otherhand, just use an *iterator* (...`yield return item`) unless otherwise called for.
+
+### Chapter 20 - Delegates
+
+Super powerful way to abstract behavior and implementation. Like little many interfaces, but with the ability to execute a bunch of methods that are not know by the executing entity.
+
+**Method adapters** are a very common design pattern that use a method to give another one a new signature
+
+```C#
+// Takes the `Attack(weapon)` method and turns it into the equivalent sinature of `Attack()`
+void AttackWithSword() {
+    currentCharacter.Attack(sword);
+}
+```
