@@ -27,8 +27,25 @@ Super powerful way to abstract behavior and implementation. Like little many int
 **Method adapters** are a very common design pattern that use a method to give another one a new signature
 
 ```C#
+public delegate void performActions();
+
 // Takes the `Attack(weapon)` method and turns it into the equivalent sinature of `Attack()`
 void AttackWithSword() {
     currentCharacter.Attack(sword);
 }
+
+// No usable with a delegate that accepts no param
+this.performActions += currentCharacter.AttackWithSword();
+
+// However, `lambda expressions` can replace these and mitigate any code stink their presence may cause.
+this.performActions +=
+    (
+        () => currentCharacter.Attack(sword)
+    )
 ```
+
+#### Events
+
+You typically declare `events` on classes desing to raise events call *event sources*. Each `event` maitains a list of *subscribers* (`InvokactionList`).
+
+When events are *raised*, all attached delegates are called in sequence.
