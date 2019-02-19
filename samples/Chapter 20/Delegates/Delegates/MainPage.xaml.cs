@@ -1,17 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using DataTypes;
 using AuditService;
 using DeliveryService;
@@ -42,6 +32,8 @@ namespace Delegates
             this.checkoutController = new CheckoutController();
             this.checkoutController.CheckoutProcessing += this.auditor.AuditOrder;
             this.checkoutController.CheckoutProcessing += this.shipper.ShipOrder;
+            this.auditor.AuditProcessingComplete += displayMessage;
+            this.shipper.ShipProcessingComplete += displayMessage;
         }
 
         private void MainPageLoaded(object sender, RoutedEventArgs e)
@@ -114,10 +106,6 @@ namespace Delegates
                 // Perform the checkout processing
                 this.checkoutController.CheckoutProcessing(this.order);    
 
-                // Display a summary of the order
-                MessageDialog dlg = new MessageDialog($"Order {order.OrderID}, value {order.TotalValue:C}", "Order Placed");
-                dlg.ShowAsync();
-
                 // Clear out the order details so the user can start again with a new order
                 this.order = new Order { Date = DateTime.Now, Items = new List<OrderItem>(), OrderID = Guid.NewGuid(), TotalValue = 0 };
                 this.orderDetails.DataContext = null;
@@ -130,6 +118,11 @@ namespace Delegates
                 MessageDialog dlg = new MessageDialog(ex.Message, "Exception");
                 dlg.ShowAsync();
             }
+        }
+
+        private void displayMessage(string message)
+        {
+            this.messageBar.Text += $"{message}{Environment.NewLine}";
         }
     }
 }
