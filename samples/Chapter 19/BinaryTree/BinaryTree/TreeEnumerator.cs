@@ -9,8 +9,8 @@ namespace BinaryTree
 {
     class TreeEnumerator<TItem> : IEnumerator<TItem> where TItem : IComparable<TItem>
     {
-        private Tree<TItem> currentData = null;
-        private TItem currentItem = default(TItem);
+        private Tree<TItem> currentData = null;  // hold reference to tree being worked over
+        private TItem currentItem = default(TItem);  // hold the value of the current prop. Set to a default value based on the actual type of TItem at runtime
         private Queue<TItem> enumData = null;
 
         public TreeEnumerator(Tree<TItem> data)
@@ -18,34 +18,29 @@ namespace BinaryTree
             this.currentData = data;
         }
 
-        object IEnumerator.Current
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         TItem IEnumerator<TItem>.Current
         {
             get
             {
-                if(this.enumData == null)
+                if (this.enumData == null)
                 {
                     throw new InvalidOperationException("Use MoveNext before calling Current");
                 }
-
                 return this.currentItem;
             }
         }
 
+        object IEnumerator.Current => throw new NotImplementedException();
+
         void IDisposable.Dispose()
         {
-            // throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         bool IEnumerator.MoveNext()
         {
+            // If this Queue is empty, go fill it up, otherwise return the next item and remove
+            // it from the Queue
             if(this.enumData == null)
             {
                 this.enumData = new Queue<TItem>();
@@ -57,20 +52,19 @@ namespace BinaryTree
                 this.currentItem = this.enumData.Dequeue();
                 return true;
             }
-
             return false;
         }
 
         private void populate(Queue<TItem> enumQueue, Tree<TItem> tree)
         {
-            if (tree.LeftTree != null)
+            if(tree.LeftTree != null)
             {
                 populate(enumQueue, tree.LeftTree);
             }
 
             enumQueue.Enqueue(tree.NodeData);
 
-            if (tree.RightTree != null)
+            if(tree.RightTree != null)
             {
                 populate(enumQueue, tree.RightTree);
             }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BinaryTree;
 
 namespace EnumeratorTest
@@ -20,9 +16,14 @@ namespace EnumeratorTest
             tree1.Insert(0);
             tree1.Insert(14);
             tree1.Insert(-8);
-            tree1.Insert(10);       
-            
-            foreach(int item in tree1)
+            tree1.Insert(10);
+
+            foreach (var item in tree1)
+            {
+                Console.WriteLine(item);
+            }
+
+            foreach (var item in tree1)
             {
                 Console.WriteLine(item);
             }
