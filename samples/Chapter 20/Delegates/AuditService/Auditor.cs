@@ -13,6 +13,9 @@ namespace AuditService
 {
     public class Auditor
     {
+        public delegate void AuditingCompleteDelegate(string message);
+        public event AuditingCompleteDelegate AuditProcessingComplete;
+
         public void AuditOrder(Order order)
         {
             this.doAuditing(order);
@@ -55,6 +58,10 @@ namespace AuditService
                 {
                     MessageDialog dlg = new MessageDialog(ex.Message, "Exception");
                     dlg.ShowAsync();
+                }
+                finally
+                {
+                    this.AuditProcessingComplete?.Invoke($"Audit record written for order {order.OrderID}");
                 }
             }
         }
