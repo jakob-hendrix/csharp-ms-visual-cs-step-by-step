@@ -51,3 +51,13 @@ You typically declare `events` on classes desing to raise events call *event sou
 When events are *raised*, all attached delegates are called in sequence. When you add a method to the invocation (subscribe) list of an event, it makes the event not *null* and gives something for the event to invoke when it is raised.
 
 In our example, `displayMessage` has the same signture as the delegates that formed the shape of the event...therefor when the event was raised by the two data classes, the UI handling event on the UI class was able to blindly accept data (through the delegate).
+
+### Chapter 21 - LINQ
+
+LINQ is a great way of accessing data from types that implement `IEnumerable<T>`. 
+
+The `Select` method allows you to especify, or *project* the fields that you want from an enumerable collection.
+
+The `Where` method alows you to filter data from being picked up by the `Select`.
+
+`GroupBy` is great because it allows you to combine larges data sets.  It returns an enumerable set of groups, where each on is an enumerable set of rows.  The set of groups has a `key` property that aloos access into the type it is encapsulating.
