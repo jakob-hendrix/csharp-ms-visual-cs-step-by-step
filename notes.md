@@ -61,3 +61,10 @@ The `Select` method allows you to especify, or *project* the fields that you wan
 The `Where` method alows you to filter data from being picked up by the `Select`.
 
 `GroupBy` is great because it allows you to combine larges data sets.  It returns an enumerable set of groups, where each on is an enumerable set of rows.  The set of groups has a `key` property that aloos access into the type it is encapsulating.
+
+### Chapter 22 - Forging custom operators
+
+If you implement equality, you must also impement `GetHashCode()`.
+
+Implicit Comversions can be thought of as **widening** of a variable is when it is implicitly cast to a type to includes it's own type, plus more (int -> double).
+Explicit Coversions can be thought of as **narrowing**
